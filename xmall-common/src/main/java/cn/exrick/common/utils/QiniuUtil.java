@@ -39,7 +39,7 @@ public class QiniuUtil {
     private static String accessKey = "BWzvv0n8icC6aR0fE13k373veR9kyKV1cuHt6TdV";
     private static String secretKey = "EXVEx4qwelzaVsBBnYbBrawsLu-V8iri-ZGTIw54";
     private static String bucket = "i-547";
-    private static String origin="up-z0.qiniup.com";
+    private static String origin="i-547.s3-cn-east-1.qiniucs.com";
     private static  Auth auth = Auth.create(accessKey, secretKey);
 
 
@@ -50,7 +50,7 @@ public class QiniuUtil {
     public static String qiniuUpload(String filePath){
 
         //构造一个带指定Zone对象的配置类 zone2华南
-        Configuration cfg = new Configuration(Zone.zone2());
+        Configuration cfg = new Configuration(Zone.huadong());
 
         UploadManager uploadManager = new UploadManager(cfg);
 
@@ -190,6 +190,6 @@ public class QiniuUtil {
     }
 
     public static void main(String[] args){
-        base64Data("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2");
+        QiniuUtil.qiniuUpload("/Users/dinghui/Documents/123.png");
     }
 }
