@@ -38,8 +38,8 @@ public class QiniuUtil {
      */
     private static String accessKey = "BWzvv0n8icC6aR0fE13k373veR9kyKV1cuHt6TdV";
     private static String secretKey = "EXVEx4qwelzaVsBBnYbBrawsLu-V8iri-ZGTIw54";
-    private static String bucket = "i-547";
-    private static String origin="i-547.s3-cn-east-1.qiniucs.com";
+    private static String bucket = "xmall-i1dh";
+    private static String origin="idv093d.qiniudns.com";
     private static  Auth auth = Auth.create(accessKey, secretKey);
 
 
@@ -64,7 +64,7 @@ public class QiniuUtil {
             Response response = uploadManager.put(localFilePath, key, upToken);
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            return origin+putRet.key;
+            return origin+"/"+putRet.key;
         }catch(QiniuException ex){
             Response r = ex.response;
             log.warn(r.toString());
