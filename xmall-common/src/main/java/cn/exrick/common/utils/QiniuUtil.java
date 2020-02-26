@@ -36,10 +36,10 @@ public class QiniuUtil {
     /**
      * 生成上传凭证，然后准备上传
      */
-    private static String accessKey = "你的accessKey";
-    private static String secretKey = "你的secretKey";
-    private static String bucket = "你的空间名，例如xmall";
-    private static String origin="你的域名，例如http://pbsw9oba0.bkt.clouddn.com/";
+    private static String accessKey = "BWzvv0n8icC6aR0fE13k373veR9kyKV1cuHt6TdV";
+    private static String secretKey = "EXVEx4qwelzaVsBBnYbBrawsLu-V8iri-ZGTIw54";
+    private static String bucket = "i-547";
+    private static String origin="i-547.s3-cn-east-1.qiniucs.com";
     private static  Auth auth = Auth.create(accessKey, secretKey);
 
 
