@@ -39,7 +39,7 @@ public class QiniuUtil {
     private static String accessKey = "BWzvv0n8icC6aR0fE13k373veR9kyKV1cuHt6TdV";
     private static String secretKey = "EXVEx4qwelzaVsBBnYbBrawsLu-V8iri-ZGTIw54";
     private static String bucket = "i-547";
-    private static String origin="i-547.s3-cn-east-1.qiniucs.com";
+    private static String origin="up-z0.qiniup.com";
     private static  Auth auth = Auth.create(accessKey, secretKey);
 
 
