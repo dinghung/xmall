@@ -231,7 +231,8 @@ public class ItemServiceImpl implements ItemService {
      */
     public void deleteProductDetRedis(Long id){
         try {
-            jedisClient.del(PRODUCT_ITEM+":"+id);
+            Long cout = jedisClient.del(PRODUCT_ITEM+":"+id);
+            log.info("删除缓存："  + PRODUCT_ITEM+":"+id + ":" + cout );
         }catch (Exception e){
             e.printStackTrace();
         }
