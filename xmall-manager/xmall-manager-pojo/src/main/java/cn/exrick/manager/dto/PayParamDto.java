@@ -40,6 +40,7 @@ public class PayParamDto implements java.io.Serializable{
     public String notifyUrl;
     //@NotNull(message = "签名[sign]不能为空")
     public String sign;
+    public String payUrl;
 
     public void singData(String paySecret){
         SortedMap<String, Object> smap = new TreeMap<String, Object>(conventToMap());

@@ -31,8 +31,10 @@ public class PayServiceImpl extends AbstractDbService implements PayService {
     @Value("${orderPeriod}")
     private int orderPeriod;
 
+
     public PayParamDto pay(PayParamDto dto){
         dto.payKey = payKey;
+        dto.payUrl = payUrl;
         dto.singData(paySecret);
         logger.info("pay sign :" + dto.sign);
         return dto;
