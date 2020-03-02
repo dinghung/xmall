@@ -2,8 +2,10 @@ package cn.exrick.manager.controller;
 
 import cn.exrick.common.pojo.Result;
 import cn.exrick.common.utils.ResultUtil;
+import cn.exrick.manager.dto.PayParamDto;
 import cn.exrick.manager.pojo.TbThanks;
 import cn.exrick.manager.service.OrderService;
+import cn.exrick.manager.service.PayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -25,11 +27,12 @@ public class PayController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private PayService payService;
 
     @RequestMapping(value = "/pay/pass",method = RequestMethod.GET)
     @ApiOperation(value = "支付审核通过")
     public Result<Object> payPass(String tokenName, String token, String id){
-
         int result=orderService.passPay(tokenName,token,id);
         if(result==-1){
             return new ResultUtil<Object>().setErrorMsg("无效的Token或链接");
@@ -108,5 +111,12 @@ public class PayController {
             return new ResultUtil<Object>().setErrorMsg("数据处理出错");
         }
         return new ResultUtil<Object>().setData("处理成功");
+    }
+
+    @RequestMapping(value = "/pay/payment",method = RequestMethod.GET)
+    @ApiOperation(value = "支付")
+    public Result<Object> payment(String orderId,String payType){
+        PayParamDto payDto = payService.pay(orderId,payType);
+        return new ResultUtil<Object>().setData(payDto);
     }
 }

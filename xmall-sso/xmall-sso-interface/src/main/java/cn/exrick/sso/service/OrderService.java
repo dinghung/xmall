@@ -1,5 +1,6 @@
 package cn.exrick.sso.service;
 
+import cn.exrick.manager.dto.PayParamDto;
 import cn.exrick.manager.dto.front.Order;
 import cn.exrick.manager.dto.front.OrderInfo;
 import cn.exrick.manager.dto.front.PageOrder;

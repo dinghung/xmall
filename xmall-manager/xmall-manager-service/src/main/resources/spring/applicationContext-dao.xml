@@ -28,4 +28,12 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="cn.exrick.manager.mapper" />
     </bean>
+    <bean class="com.itranswarp.warpdb.WarpDb" init-method="init">
+        <property name="basePackages">
+            <list>
+                <value>cn.exrick.manager.wapdbdto</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 </beans>

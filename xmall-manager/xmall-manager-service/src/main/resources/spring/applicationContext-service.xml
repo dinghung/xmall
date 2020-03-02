@@ -35,4 +35,5 @@
     <dubbo:service interface="cn.exrick.manager.service.DictService" ref="dictServiceImpl" timeout="10000"/>
     <dubbo:service interface="cn.exrick.manager.service.ExpressService" ref="expressServiceImpl" timeout="10000"/>
     <dubbo:service interface="cn.exrick.manager.service.CountService" ref="countServiceImpl" timeout="10000"/>
+    <dubbo:service interface="cn.exrick.manager.service.PayService" ref="payServiceImpl" timeout="10000"/>
 </beans>

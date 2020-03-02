@@ -1,5 +1,6 @@
 package cn.exrick.common.utils;
 
+import okhttp3.*;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -28,6 +29,11 @@ public class HttpUtil {
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
     private static final String userAgent = "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.87 Safari/537.36";
 
+    private static final OkHttpClient okhttpclent = new OkHttpClient();
+    private static final String EMPTY_JSON = "{}";
+
+    private static final MediaType MEDIA_TYPE_APPLICATION_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
+    private static final MediaType MEDIATYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
     /**
      * 发送HttpGet请求
      * @param url 请求地址
@@ -100,5 +106,31 @@ public class HttpUtil {
             }
         }
         return result;
+    }
+
+
+    /**
+     * 异步POST请求字符串
+     */
+    public static String callPost_JSON(String url,String json_param)  {
+
+        RequestBody body = RequestBody.create(MEDIATYPE_APPLICATION_JSON, json_param);
+        Request request = new Request.Builder()
+                .post(body)
+                .url(url)
+                .build();
+        try {
+            Response response =  okhttpclent.newCall(request).execute();
+            if(response.code() == 200){
+                return response.body().string();
+            }else return EMPTY_JSON;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return EMPTY_JSON;
+        }
+    }
+
+    public static void main(String[] args){
+        System.out.printf(callPost_JSON("http://gateway.i1dh.com/scanPay/initPay","{}"));
     }
 }
