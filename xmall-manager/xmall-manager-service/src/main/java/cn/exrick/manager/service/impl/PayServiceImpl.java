@@ -43,7 +43,6 @@ public class PayServiceImpl extends AbstractDbService implements PayService {
     @Override
     public PayParamDto pay(String orderId, String payType) {
         TbOrder tbOrder = db.from(TbOrder.class).where("orderId=?",orderId).first();
-
         PayParamDto payDto = new PayParamDto();
         payDto.productName = "辉暘工作室支付";
         payDto.orderNo = orderId.toString();

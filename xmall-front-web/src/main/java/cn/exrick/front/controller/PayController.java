@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,9 +19,11 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-    @RequestMapping(value = "/pay/payment",method = RequestMethod.POST)
+    @RequestMapping(value = "/pay/payment",method = RequestMethod.GET)
     @ApiOperation(value = "支付")
-    public Result<Object> payment(String orderId, String payType){
+    public Result<Object> payment(@RequestParam(defaultValue = "")String orderId,
+                                  @RequestParam(defaultValue = "")String payType){
+        System.out.printf("orderId" + orderId);
         PayParamDto payDto = payService.pay(orderId,payType);
         return new ResultUtil<Object>().setData(payDto);
     }
