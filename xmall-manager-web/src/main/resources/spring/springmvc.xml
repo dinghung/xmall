@@ -130,5 +130,4 @@
     <dubbo:reference interface="cn.exrick.manager.service.DictService" id="dictService"/>
     <dubbo:reference interface="cn.exrick.manager.service.ExpressService" id="expressService"/>
     <dubbo:reference interface="cn.exrick.manager.service.CountService" id="countService"/>
-    <dubbo:reference interface="cn.exrick.manager.service.PayService" id="payService"/>
 </beans>

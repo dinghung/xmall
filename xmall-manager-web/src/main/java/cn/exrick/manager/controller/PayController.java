@@ -27,8 +27,6 @@ public class PayController {
 
     @Autowired
     private OrderService orderService;
-    @Autowired
-    private PayService payService;
 
     @RequestMapping(value = "/pay/pass",method = RequestMethod.GET)
     @ApiOperation(value = "支付审核通过")
@@ -111,12 +109,5 @@ public class PayController {
             return new ResultUtil<Object>().setErrorMsg("数据处理出错");
         }
         return new ResultUtil<Object>().setData("处理成功");
-    }
-
-    @RequestMapping(value = "/pay/payment",method = RequestMethod.GET)
-    @ApiOperation(value = "支付")
-    public Result<Object> payment(String orderId,String payType){
-        PayParamDto payDto = payService.pay(orderId,payType);
-        return new ResultUtil<Object>().setData(payDto);
     }
 }
