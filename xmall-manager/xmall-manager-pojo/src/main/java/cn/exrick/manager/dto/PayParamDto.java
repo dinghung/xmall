@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class PayParamDto {
+public class PayParamDto implements java.io.Serializable{
 
     //@NotNull(message = "商户Key[payKey]不能为空")
     @JSONField(serialize = false)
