@@ -17,11 +17,13 @@ public class PayController {
 
     @Autowired
     private PayService payService;
-    
+
     @RequestMapping(value = "/pay/payment",method = RequestMethod.POST)
     @ApiOperation(value = "支付")
     public Result<Object> payment(String orderId, String payType){
+        System.out.printf("orderId:" + orderId);
         PayParamDto payDto = payService.pay(orderId,payType);
+        System.out.printf("payDto:" + payDto.productName);
         return new ResultUtil<Object>().setData(payDto);
     }
 }
