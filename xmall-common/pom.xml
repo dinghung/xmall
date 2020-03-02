@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.itranswarp</groupId>
             <artifactId>warpdb</artifactId>
-            <version>5.0.0</version>
+            <version>4.0</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
