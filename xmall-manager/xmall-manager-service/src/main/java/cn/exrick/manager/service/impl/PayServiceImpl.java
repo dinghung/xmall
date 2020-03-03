@@ -62,6 +62,7 @@ public class PayServiceImpl extends AbstractDbService implements PayService {
         payDto.orderTime = orderTimeStr;
         payDto.returnUrl = returnUrl;
         payDto.notifyUrl = notifyUrl;
+        payDto.payType = "DIRECT_PAY";
         pay(payDto);
         return payDto;
     }

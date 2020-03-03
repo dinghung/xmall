@@ -42,6 +42,7 @@ public class PayParamDto implements java.io.Serializable{
     //@NotNull(message = "签名[sign]不能为空")
     public String sign;
     public String payUrl;
+    public String payType;
 
     public void singData(String paySecret){
         SortedMap<String, Object> smap = new TreeMap<String, Object>(conventToMap());
@@ -53,7 +54,7 @@ public class PayParamDto implements java.io.Serializable{
             }
         }
         stringBuffer.delete(stringBuffer.length() - 1, stringBuffer.length());
-
+        System.out.printf(stringBuffer.toString());
 
         String argPreSign = stringBuffer.append("&paySecret=").append(paySecret).toString();
         String signStr = MD5Util.encode(argPreSign).toUpperCase();
@@ -84,24 +85,18 @@ public class PayParamDto implements java.io.Serializable{
     public static void main(String[] args) {
         PayParamDto payDto = new PayParamDto();
         payDto.productName = "辉暘工作室支付";
-        payDto.orderNo = "1";
-        payDto.orderPrice = new BigDecimal(2);
-        try {
-            payDto.orderIp = InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        payDto.orderPeriod = 5;
-        //returnUrl
-        //notifyUrl
-        Date orderTime = new Date();//订单时间
-        String orderDateStr = new SimpleDateFormat("yyyyMMdd").format(orderTime);// 订单日期
         String orderTimeStr = new SimpleDateFormat("yyyyMMddHHmmss").format(orderTime);// 订单时间
-        payDto.orderDate = orderDateStr;
-        payDto.orderTime = orderTimeStr;
-        payDto.returnUrl = "XX";
-        payDto.notifyUrl = "YY";
+        payDto.orderNo = "158323407168631";
+        payDto.orderPrice = new BigDecimal(600);
+        payDto.orderIp = "0:0:0:0:0:0:0:1";
+        payDto.orderPeriod = 60;
+        payDto.orderDate = "20200303";
+        payDto.orderTime = "20200303191441";
+        payDto.returnUrl = "http://mall.i1dh.com/";
+        payDto.notifyUrl = "http://mall.i1dh.com/pay/notifyUrl";
         payDto.payUrl = "ZZ";
-        payDto.singData("123");
+        payDto.payKey = "2c943e6b77b7427c94019c7d19e4ab31";
+        payDto.singData("899fd64983684f078927b68bfb5bde18");
+        System.out.print("sign:" + payDto.sign);
     }
 }

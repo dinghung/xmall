@@ -23,7 +23,6 @@ public class PayController {
     @ApiOperation(value = "支付")
     public Result<Object> payment(@RequestParam(defaultValue = "")String orderId,
                                   @RequestParam(defaultValue = "")String payType){
-        System.out.printf("orderId" + orderId);
         PayParamDto payDto = payService.pay(orderId,payType);
         return new ResultUtil<Object>().setData(payDto);
     }
