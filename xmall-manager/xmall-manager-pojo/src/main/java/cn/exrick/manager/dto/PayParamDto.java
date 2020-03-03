@@ -69,6 +69,10 @@ public class PayParamDto implements java.io.Serializable{
                 String filedName = field.getName();
                 if("payUrl".equals(filedName))continue;//payUrl字段不参与签名
                 Object value = field.get(this);
+                if(value instanceof BigDecimal){
+                    value = ((BigDecimal)value).stripTrailingZeros().toPlainString();//金额参与签名时去掉尾部0
+                }
+
                 if(value==null)continue;
                 result.put(filedName,value);
             }
@@ -86,7 +90,7 @@ public class PayParamDto implements java.io.Serializable{
         PayParamDto payDto = new PayParamDto();
         payDto.productName = "辉暘工作室支付";
         payDto.orderNo = "158323407168631";
-        payDto.orderPrice = new BigDecimal(600);
+        payDto.orderPrice = new BigDecimal("600.00");
         payDto.orderIp = "0:0:0:0:0:0:0:1";
         payDto.orderPeriod = 60;
         payDto.orderDate = "20200303";
