@@ -34,8 +34,8 @@ public class PayServiceImpl extends AbstractDbService implements PayService {
 
     public PayParamDto pay(PayParamDto dto){
         dto.payKey = payKey;
-        dto.payUrl = payUrl;
         dto.singData(paySecret);
+        dto.payUrl = payUrl;
         logger.info("pay sign :" + dto.sign);
         return dto;
     }

@@ -7,13 +7,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class PayParamDto implements java.io.Serializable{
 
@@ -61,29 +62,46 @@ public class PayParamDto implements java.io.Serializable{
 
     public SortedMap<String, Object> conventToMap(){
         SortedMap<String, Object> result = new TreeMap<String, Object>();
-        Method[] methods = this.getClass().getMethods();
+        Field[] fields = this.getClass().getFields();
         try {
-            for (Method method : methods) {
-                Class<?>[] paramClass = method.getParameterTypes();
-                if (paramClass.length > 0) { // 如果方法带参数，则跳过
-                    continue;
-                }
-                String methodName = method.getName() ;
-                if (methodName.startsWith("get")) {
-                    Object value = method.invoke(this);
-                    result.put(methodName, value);
-                }
+            for(Field field : fields){
+                String filedName = field.getName();
+                if("payUrl".equals(filedName))continue;//payUrl字段不参与签名
+                Object value = field.get(this);
+                if(value==null)continue;
+                result.put(filedName,value);
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
+        }  catch (SecurityException e) {
+            e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    public static void main(String[] args) {
+        PayParamDto payDto = new PayParamDto();
+        payDto.productName = "辉暘工作室支付";
+        payDto.orderNo = "1";
+        payDto.orderPrice = new BigDecimal(2);
+        try {
+            payDto.orderIp = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        payDto.orderPeriod = 5;
+        //returnUrl
+        //notifyUrl
+        Date orderTime = new Date();//订单时间
+        String orderDateStr = new SimpleDateFormat("yyyyMMdd").format(orderTime);// 订单日期
+        String orderTimeStr = new SimpleDateFormat("yyyyMMddHHmmss").format(orderTime);// 订单时间
+        payDto.orderDate = orderDateStr;
+        payDto.orderTime = orderTimeStr;
+        payDto.returnUrl = "XX";
+        payDto.notifyUrl = "YY";
+        payDto.payUrl = "ZZ";
+        payDto.singData("123");
+    }
 }
