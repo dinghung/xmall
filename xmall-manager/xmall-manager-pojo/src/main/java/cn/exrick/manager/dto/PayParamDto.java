@@ -85,7 +85,6 @@ public class PayParamDto implements java.io.Serializable{
     public static void main(String[] args) {
         PayParamDto payDto = new PayParamDto();
         payDto.productName = "辉暘工作室支付";
-        String orderTimeStr = new SimpleDateFormat("yyyyMMddHHmmss").format(orderTime);// 订单时间
         payDto.orderNo = "158323407168631";
         payDto.orderPrice = new BigDecimal(600);
         payDto.orderIp = "0:0:0:0:0:0:0:1";
