@@ -60,6 +60,8 @@ public class PayServiceImpl extends AbstractDbService implements PayService {
         String orderTimeStr = new SimpleDateFormat("yyyyMMddHHmmss").format(orderTime);// 订单时间
         payDto.orderDate = orderDateStr;
         payDto.orderTime = orderTimeStr;
+        payDto.returnUrl = returnUrl;
+        payDto.notifyUrl = notifyUrl;
         pay(payDto);
         return payDto;
     }
